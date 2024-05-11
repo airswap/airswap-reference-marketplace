@@ -43,4 +43,12 @@ module.exports = {
   typescript: {
     enableTypeChecking: true,
   },
+  devServer: {
+    headers: {
+      "Access-Control-Allow-Origin": "https://app.safe.global",
+      "Access-Control-Allow-Methods": "GET",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization",
+      "Access-Control-Allow-Credentials": "true"
+    },
+  }
 };

@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getLastProviderFromLocalStorage } from '../../redux/stores/web3/web3Api';
 import { setConnectionType, setIsInitialized, setUserHasClosedConnectModal } from '../../redux/stores/web3/web3Slice';
 import { ConnectionType, getConnection } from '../../web3-connectors/connections';
+import { buildGnosisSafeConnector } from '../../web3-connectors/gnosis';
 import { tryActivateConnector } from '../../web3-connectors/helpers';
 import walletProviders, { WalletProvider } from '../../web3-connectors/walletProviders';
 import WalletProviderList from './subcomponents/WalletProviderList/WalletProviderList';
@@ -78,6 +79,16 @@ const WalletConnector: FC<WalletConnectorProps> = ({ onCloseButtonClick, classNa
     }
 
     activateWalletEagerly(getConnection(type).connector, type);
+  }, []);
+
+  useEffect(() => {
+    const gnosisSafe = buildGnosisSafeConnector();
+
+    try {
+      activateWalletEagerly(gnosisSafe.connector, gnosisSafe.type);
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
   useEffect(() => {

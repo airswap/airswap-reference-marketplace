@@ -1,6 +1,8 @@
 {
-  "short_name": "AirSwap",
-  "name": "AirSwap",
+  "short_name": "Marketplace",
+  "name": "Airswap NFT Marketplace",
+  "description": "An NFT marketplace by Airswap",
+  "iconPath": "logo512.png",
   "icons": [
     {
       "src": "favicon.ico",

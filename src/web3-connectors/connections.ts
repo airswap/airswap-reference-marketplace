@@ -2,6 +2,7 @@ import { Web3ReactHooks } from '@web3-react/core';
 import { Connector } from '@web3-react/types';
 
 import { buildCoinbaseWalletConnector } from './coinbase';
+import { buildGnosisSafeConnector } from './gnosis';
 import { buildInjectedConnector } from './injected';
 import { buildWalletConnectConnector } from './walletConnect';
 
@@ -15,12 +16,14 @@ export enum ConnectionType {
   coinbase = 'coinbase',
   injected = 'injected',
   walletConnect = 'walletConnect',
+  gnosis = 'gnosis',
 }
 
 export const prioritizedConnectors: { [key in ConnectionType]: Connection } = {
   [ConnectionType.coinbase]: buildCoinbaseWalletConnector(),
   [ConnectionType.injected]: buildInjectedConnector(),
   [ConnectionType.walletConnect]: buildWalletConnectConnector(),
+  [ConnectionType.gnosis]: buildGnosisSafeConnector(),
 };
 
 export function getConnection(c: Connector | ConnectionType): Connection {
@@ -39,6 +42,10 @@ export function getConnection(c: Connector | ConnectionType): Connection {
 
   if (c === ConnectionType.walletConnect) {
     return prioritizedConnectors[ConnectionType.walletConnect];
+  }
+
+  if (c === ConnectionType.gnosis) {
+    return prioritizedConnectors[ConnectionType.gnosis];
   }
 
   return prioritizedConnectors[ConnectionType.injected];
